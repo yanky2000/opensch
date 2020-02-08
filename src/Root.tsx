@@ -1,15 +1,15 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Names, client } from './client';
+import { Home } from './components/Home';
 
-const App: React.FC = () => {
+export const Root: React.FC = () => {
     return (
         <ApolloProvider client={client}>
             <div className="App">
+                <Home />
                 <Names />
             </div>
         </ApolloProvider>
     );
 };
-
-export default App;

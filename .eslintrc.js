@@ -26,6 +26,7 @@ module.exports = {
                 prefixWithI: 'always',
             },
         ],
+        'react/prop-types': 0,
     },
     settings: {
         react: {
