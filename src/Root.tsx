@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { Names, client } from './client';
+import { client } from './client';
 import { Home } from './components/Home';
 
 export const Root: React.FC = () => {
@@ -8,7 +8,6 @@ export const Root: React.FC = () => {
         <ApolloProvider client={client}>
             <div className="App">
                 <Home />
-                <Names />
             </div>
         </ApolloProvider>
     );

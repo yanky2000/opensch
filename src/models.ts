@@ -3,3 +3,13 @@ export interface ICharacter {
     name: string;
     image: string;
 }
+
+export interface ICharacterData {
+    characters: {
+        results: ICharacter[];
+    };
+}
+
+export interface ICharacterVars {
+    id: string;
+}
