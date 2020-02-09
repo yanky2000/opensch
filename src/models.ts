@@ -11,5 +11,6 @@ export interface ICharacterData {
 }
 
 export interface ICharacterVars {
-    id: string;
+    // id: string;
+    name: string;
 }

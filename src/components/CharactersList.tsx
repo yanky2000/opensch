@@ -4,8 +4,10 @@ import { ICharacterVars, ICharacterData } from 'models';
 import { CharacterItem } from './CharacterItem';
 import { GET_CHARACTERS } from 'Apollo/queries';
 
-export const CharactersList: React.FC = () => {
-    const { loading, error, data } = useQuery<ICharacterData, ICharacterVars>(GET_CHARACTERS);
+export const CharactersList: React.FC<{ searchString: string }> = ({ searchString }) => {
+    const { loading, error, data } = useQuery<ICharacterData, ICharacterVars>(GET_CHARACTERS, {
+        variables: { name: searchString },
+    });
 
     if (loading) return <p>Loading...</p>;
     if (error || !data) return <p>Error :(</p>;
