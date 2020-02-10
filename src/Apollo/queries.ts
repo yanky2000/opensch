@@ -17,3 +17,23 @@ export const GET_CHARACTERS = gql`
         }
     }
 `;
+
+export const GET_TEST = gql`
+    {
+        getTest @client
+        isInCart @client
+    }
+`;
+export const GET_TEST2 = gql`
+    {
+        launch {
+            isInCart @client
+        }
+    }
+`;
+
+export const GET_CART_ITEMS = gql`
+    query GetCartItems {
+        cartItems @client
+    }
+`;
