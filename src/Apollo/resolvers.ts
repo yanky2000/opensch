@@ -3,7 +3,8 @@ import { ApolloCache } from 'apollo-cache';
 // import * as GetCartItemTypes from './pages/__generated_/GetCartItems';
 // import * as LaunchTileTypes from './pages/__generated__/LaunchTile';
 import { Resolvers } from 'apollo-client';
-import { GET_CART_ITEMS } from './queries';
+import { GET_CART_ITEMS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS } from './queries';
+import { client } from './client';
 
 export const typeDefs = gql`
     extend type Query {
@@ -12,7 +13,7 @@ export const typeDefs = gql`
     }
 
     extend type Launch {
-        isInCart: STRING!
+        isInCart: String!
     }
 
     extend type Mutation {
@@ -32,20 +33,59 @@ interface AppResolvers extends Resolvers {
 }
 
 export const resolvers = {
-    Launch: {
+    // Launch: {
+    Mutation: {
+        addSelected: (_root, { character, position }, { cache, getCacheKey }) => {
+            const data = client.readQuery({ query: GET_SELECTED_CHARACTERS });
+            client.writeQuery({
+                query: GET_SELECTED_CHARACTERS,
+                data: {
+                    selectedHeroes: {
+                        ...data.selectedHeroes,
+                        [position]: character,
+                    },
+                },
+            });
+            return null;
+        },
+
+        addDeleted: (_root, { id }, { cache, getCacheKey }) => {
+            // console.log('root', _root);
+            // console.log('vars', id);
+            // console.log('cache', cache);
+            // const id = getCacheKey({ __typename: 'TodoItem', id: variables.id })
+
+            // const fragment = gql`
+            //   fragment completeTodo on TodoItem {
+            //     completed
+            //   }
+            // `;
+            // const todo = cache.readFragment({ fragment, id });
+            // const data = { ...todo, completed: !todo.completed };
+
+            const data = client.readQuery({ query: GET_DELETED_CHARACTERS });
+
+            client.writeQuery({
+                query: GET_DELETED_CHARACTERS,
+                data: {
+                    deletedCharacterIds: [...data.deletedCharacterIds, id],
+                },
+            });
+            return null;
+        },
         // isInCart: (launch: LaunchTileTypes.LaunchTile, _, { cache }): boolean => {
         // isInCart: (launch: {id: 1}, _, { cache }): boolean => {
-        isInCart: (launch: {id: 1}, _, { cache }): any => {
-            return 'hello'
-            // const queryResult = cache.readQuery<GetCartItemTypes.GetCartItems>({
-            const queryResult = cache.readQuery({
-                query: GET_CART_ITEMS,
-            });
-            if (queryResult) {
-                return true 
-                // return queryResult.cartItems.includes(launch.id);
-            }
-            return false;
-        },
+        // isInCart: (launch: { id: 1 }, _, { cache }): any => {
+        //     return 'hello';
+        //     // const queryResult = cache.readQuery<GetCartItemTypes.GetCartItems>({
+        //     const queryResult = cache.readQuery({
+        //         query: GET_CART_ITEMS,
+        //     });
+        //     if (queryResult) {
+        //         return true;
+        //         // return queryResult.cartItems.includes(launch.id);
+        //     }
+        //     return false;
+        // },
     },
 };

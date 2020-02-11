@@ -14,5 +14,10 @@ cache.writeData({
         getTest: 'store is working',
         isLoggedIn: !!localStorage.getItem('token'),
         cartItems: [],
+        deletedCharacterIds: [],
+        selectedHeroes: {
+            left: { id: '', name: '', image: '' },
+            right: { id: '', name: '', image: '' },
+        },
     },
 });

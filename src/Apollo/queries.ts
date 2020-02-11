@@ -17,11 +17,23 @@ export const GET_CHARACTERS = gql`
         }
     }
 `;
+export const GET_DELETED_CHARACTERS = gql`
+    {
+        deletedCharacterIds
+    }
+`;
 
+export const GET_SELECTED_CHARACTERS = gql`
+    {
+        selectedHeroes {
+            left
+            right
+        }
+    }
+`;
 export const GET_TEST = gql`
     {
         getTest @client
-        isInCart @client
     }
 `;
 export const GET_TEST2 = gql`

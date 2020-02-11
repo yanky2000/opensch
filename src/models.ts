@@ -1,3 +1,5 @@
+import { POSITIONS } from "./constants";
+
 export interface ICharacter {
     id: string;
     name: string;
@@ -14,3 +16,6 @@ export interface ICharacterVars {
     // id: string;
     name: string;
 }
+
+
+export type IAllSlotPositions = keyof typeof POSITIONS
