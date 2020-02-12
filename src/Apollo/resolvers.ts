@@ -3,11 +3,12 @@ import { ApolloCache } from 'apollo-cache';
 // import * as GetCartItemTypes from './pages/__generated_/GetCartItems';
 // import * as LaunchTileTypes from './pages/__generated__/LaunchTile';
 import { Resolvers } from 'apollo-client';
-import { GET_CART_ITEMS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_SEL } from './queries';
+import { GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_ALL_SELECTED } from './queries';
 import { client } from './client';
 
 export const typeDefs = gql`
     extend type Query {
+        getOneSelected: String!
         isLoggedIn: Boolean!
         cartItems: [ID!]!
     }
@@ -33,17 +34,29 @@ interface AppResolvers extends Resolvers {
 }
 
 export const resolvers = {
-    // Launch: {
-    Mutation: {
-        changeVal: (_root, { character, position }, { cache, getCacheKey }) => {
-            return null;
+    Query: {
+        getOneSelected: (_root, { id }, { cache, getCacheKey }) => {
+
+            const queryResult = cache.readQuery<GetCartItemTypes.GetCartItems>({
+
+            const queryResult = cache.readQuery({
+                query: GET_CART_ITEMS,
+            });
+            if (queryResult) {
+                // return true;
+                return queryResult.cartItems.includes(launch.id);
+            }
+ 
+            // return null;
         },
-        addSelected: (_root, {character, position}, { cache, getCacheKey }) => {
-            const query = client.readQuery({ query: GET_SEL });
+    },
+    Mutation: {
+        addSelected: (_root, { id, position }, { cache, getCacheKey }) => {
+            const query = client.readQuery({ query: GET_ALL_SELECTED });
 
             client.writeQuery({
-                query: GET_SEL,
-                data: { sel: {...query.sel, [position]: character} },
+                query: GET_ALL_SELECTED,
+                data: { selected: { ...query.selected, [position]: id } },
             });
             return null;
         },

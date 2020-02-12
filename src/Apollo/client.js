@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { resolvers, typeDefs } from './resolvers';
-import { GET_SEL } from './queries';
+import { GET_ALL_SELECTED } from './queries';
 
 const cache = new InMemoryCache();
 export const client = new ApolloClient({
@@ -41,6 +41,6 @@ cache.writeData({
 });
 
 client.writeQuery({
-    query: GET_SEL,
-    data: { sel: { left: 'will', right: 'will r' } },
+    query: GET_ALL_SELECTED,
+    data: { selected: { left: 'will', right: 'will r' } },
 });

@@ -22,13 +22,16 @@ export const GET_DELETED_CHARACTERS = gql`
         deletedCharacterIds
     }
 `;
-export const GET_SEL = gql`
+export const GET_ALL_SELECTED = gql`
     {
-        sel @client
-        
+        selected @client
     }
 `;
-
+export const GET_ONE_SELECTED = gql`
+    query GetOneSelected($characterId: String!){
+        selected(id:$characterId) @client
+    }
+`;
 export const GET_SELECTED_CHARACTERS = gql`
     {
         selectedHeroes @client {
@@ -37,21 +40,21 @@ export const GET_SELECTED_CHARACTERS = gql`
         }
     }
 `;
-export const GET_TEST = gql`
-    {
-        getTest @client
-    }
-`;
-export const GET_TEST2 = gql`
-    {
-        launch {
-            isInCart @client
-        }
-    }
-`;
+// export const GET_TEST = gql`
+//     {
+//         getTest @client
+//     }
+// `;
+// export const GET_TEST2 = gql`
+//     {
+//         launch {
+//             isInCart @client
+//         }
+//     }
+// `;
 
-export const GET_CART_ITEMS = gql`
-    query GetCartItems {
-        cartItems @client
-    }
-`;
+// export const GET_CART_ITEMS = gql`
+//     query GetCartItems {
+//         cartItems @client
+//     }
+// `;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ICharacter } from 'models';
 import styled from 'styled-components';
+import { POSITIONS } from '../constants';
 
 const Slot = styled.div`
     width: 180px;
@@ -11,8 +12,13 @@ const EmptySlot = styled(Slot)`
     background-color: grey;
 `;
 
-export const CharacterSlot: React.FC<Partial<ICharacter>> = ({ name, image }) => {
-    if (!image) return <EmptySlot>{name}</EmptySlot>; // <h1> sorry</h1>
+interface IProps {
+    position: string;
+}
 
-    return <div>{name}</div>;
+export const CharacterSlot: React.FC<IProps> = props => {
+    
+    if (!props) return <EmptySlot>Oops</EmptySlot>; // <h1> sorry</h1>
+
+    return <div>{props.position}</div>;
 };

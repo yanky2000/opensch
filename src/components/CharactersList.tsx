@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { ICharacterVars, ICharacterData } from 'models';
 import { CharacterItem } from './CharacterItem';
-import { GET_CHARACTERS, GET_TEST, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_SEL } from 'Apollo/queries';
+import { GET_CHARACTERS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_ALL_SELECTED } from 'Apollo/queries';
 import { ADD_SELECTED } from 'Apollo/mutations';
 
 export const CharactersList: React.FC<{ searchString: string }> = ({ searchString }) => {
@@ -24,8 +24,8 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
         return <div>Selcted ids: {JSON.stringify(data)}</div>;
     }
     function Left() {
-        const { data } = useQuery(GET_SEL);
-        return <div>get ids: {JSON.stringify(data.sel.left)}</div>;
+        const { data } = useQuery(GET_ALL_SELECTED);
+        return <div>Selected ids: {JSON.stringify(data.selected)}</div>;
     }
     const handle = () => {
         selectCharacter({ variables: { position: 'right' } });
@@ -33,7 +33,6 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
     return (
         <ul>
             <Test />
-            <Selected />
             <Left />
             {data &&
                 data.characters &&

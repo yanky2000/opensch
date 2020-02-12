@@ -17,5 +17,4 @@ export interface ICharacterVars {
     name: string;
 }
 
-
 export type IAllSlotPositions = keyof typeof POSITIONS

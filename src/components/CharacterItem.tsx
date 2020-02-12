@@ -50,7 +50,7 @@ export const CharacterItem: React.FC<ICharacter> = character => {
         const slotPosition = getSlotPosition(name);
         if (!slotPosition) return null;
 
-        selectCharacter({ variables: { character, position: slotPosition } });
+        selectCharacter({ variables: { id, position: slotPosition } });
     };
 
     return (

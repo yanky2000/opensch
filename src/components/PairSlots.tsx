@@ -1,5 +1,5 @@
 import React from 'react';
-import { MORTY, RICK } from '../constants';
+import { MORTY, RICK, POSITIONS } from '../constants';
 import { CharacterSlot } from './CharacterSlot';
 
 export const PairSlots: React.FC = () => {
@@ -7,9 +7,13 @@ export const PairSlots: React.FC = () => {
 
     return (
         <>
-            {targetCharacters.map(name => (
-                <CharacterSlot key={name} name={name} />
+            {Object.keys(POSITIONS).map((position) => (
+                <CharacterSlot key={position} position={position} />
             ))}
+
+            {/* {targetCharacters.map(name => (
+                <CharacterSlot key={name} name={name} />
+            ))} */}
         </>
     );
 };

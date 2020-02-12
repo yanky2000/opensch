@@ -15,8 +15,8 @@ export const Home: React.FC = () => {
     return (
         <>
             <SearchForm cb={setSearchString} />
-            <CharactersList searchString={searchString} />
             <PairSlots />
+            <CharactersList searchString={searchString} />
             {/* <CharacterSlot
                 {...c}
                 // name="hel"

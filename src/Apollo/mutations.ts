@@ -14,8 +14,8 @@ export const ADD_DELETED = gql`
 //   }
 // `;
 export const ADD_SELECTED = gql`
-  mutation AddSelected($character: String, $position: String) {
-    addSelected(character: $character, position: $position) @client
+  mutation AddSelected($id: String!, $position: String!) {
+    addSelected(id: $id, position: $position) @client
     
   }
 `;
