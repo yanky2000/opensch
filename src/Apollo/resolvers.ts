@@ -3,7 +3,7 @@ import { ApolloCache } from 'apollo-cache';
 // import * as GetCartItemTypes from './pages/__generated_/GetCartItems';
 // import * as LaunchTileTypes from './pages/__generated__/LaunchTile';
 import { Resolvers } from 'apollo-client';
-import { GET_CART_ITEMS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS } from './queries';
+import { GET_CART_ITEMS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_SEL } from './queries';
 import { client } from './client';
 
 export const typeDefs = gql`
@@ -35,16 +35,15 @@ interface AppResolvers extends Resolvers {
 export const resolvers = {
     // Launch: {
     Mutation: {
-        addSelected: (_root, { character, position }, { cache, getCacheKey }) => {
-            const data = client.readQuery({ query: GET_SELECTED_CHARACTERS });
+        changeVal: (_root, { character, position }, { cache, getCacheKey }) => {
+            return null;
+        },
+        addSelected: (_root, {character, position}, { cache, getCacheKey }) => {
+            const query = client.readQuery({ query: GET_SEL });
+
             client.writeQuery({
-                query: GET_SELECTED_CHARACTERS,
-                data: {
-                    selectedHeroes: {
-                        ...data.selectedHeroes,
-                        [position]: character,
-                    },
-                },
+                query: GET_SEL,
+                data: { sel: {...query.sel, [position]: character} },
             });
             return null;
         },

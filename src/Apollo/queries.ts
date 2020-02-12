@@ -22,12 +22,18 @@ export const GET_DELETED_CHARACTERS = gql`
         deletedCharacterIds
     }
 `;
+export const GET_SEL = gql`
+    {
+        sel @client
+        
+    }
+`;
 
 export const GET_SELECTED_CHARACTERS = gql`
     {
-        selectedHeroes {
-            left
-            right
+        selectedHeroes @client {
+            name
+            position
         }
     }
 `;

@@ -2,8 +2,7 @@ import React from 'react';
 import { ICharacter } from '../models';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_DELETED } from 'Apollo/mutations';
-import { GET_SELECTED_CHARACTERS } from 'Apollo/queries';
+import { ADD_DELETED, ADD_SELECTED } from 'Apollo/mutations';
 import { getSlotPosition } from 'utils';
 
 interface IProps {
@@ -36,34 +35,31 @@ const CloseCross = styled.div`
     border-radius: 50%;
 `;
 
-// export const CharacterItem: React.FC<ICharacterCardProps> = ({ name, id, image, cb }) => {
 export const CharacterItem: React.FC<ICharacter> = character => {
     const { id, name, image } = character;
 
     const [deleteCharacter, { data }] = useMutation(ADD_DELETED);
+    const [selectCharacter, _] = useMutation(ADD_SELECTED);
 
-    // const [selectCharacter, { data }] = useMutation(GET_SELECTED_CHARACTERS);
-    const [selectCharacter, _] = useMutation(GET_SELECTED_CHARACTERS);
-
-    const clickHandler = e => {
-        // e.stopPropagation()
+    const deleteCard = e => {
+        e.stopPropagation();
         deleteCharacter({ variables: { id } });
-        console.log(id);
     };
-    const handler = e => {
+
+    const selectCard = e => {
         const slotPosition = getSlotPosition(name);
         if (!slotPosition) return null;
 
-        selectCharacter({ variables: { position: slotPosition, character } });
-        console.log('selected', id, slotPosition);
+        selectCharacter({ variables: { character, position: slotPosition } });
     };
+
     return (
         <div key={id}>
             <p>
                 {id}-{name}
             </p>
-            <CharacterCard url={image} onClick={handler}>
-                <CloseCross onClick={clickHandler}>
+            <CharacterCard url={image} onClick={selectCard}>
+                <CloseCross onClick={deleteCard}>
                     <svg width="10" height="10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <line x1="0" y1="100" x2="100" y2="0" strokeWidth="14" stroke="black" />
                         <line x1="0" y1="0" x2="100" y2="100" strokeWidth="14" stroke="black" />

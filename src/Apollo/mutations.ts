@@ -7,3 +7,15 @@ export const ADD_DELETED = gql`
     }
   }
 `;
+// export const ADD_SELECTED = gql`
+//   mutation AddSelected($position: String!, $id: String!) {
+//     addSelected(position: $position, id: $id) @client
+    
+//   }
+// `;
+export const ADD_SELECTED = gql`
+  mutation AddSelected($character: String, $position: String) {
+    addSelected(character: $character, position: $position) @client
+    
+  }
+`;
