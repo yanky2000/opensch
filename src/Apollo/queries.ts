@@ -37,19 +37,19 @@ export const GET_ALL_SELECTED = gql`
         selected @client
     }
 `;
-export const GET_ONE_SELECTED = gql`
-    query GetOneSelected($characterId: String!) {
-        selected(id: $characterId) @client
-    }
-`;
-export const GET_SELECTED_CHARACTERS = gql`
-    {
-        selectedHeroes @client {
-            name
-            position
-        }
-    }
-`;
+// export const GET_ONE_SELECTED = gql`
+//     query GetOneSelected($characterId: String!) {
+//         selected(id: $characterId) @client
+//     }
+// `;
+// export const GET_SELECTED_CHARACTERS = gql`
+//     {
+//         selectedHeroes @client {
+//             name
+//             position
+//         }
+//     }
+// `;
 // export const GET_TEST = gql`
 //     {
 //         getTest @client

@@ -5,15 +5,20 @@ import { ApolloCache } from 'apollo-cache';
 import { Resolvers } from 'apollo-client';
 import {
     GET_DELETED_CHARACTERS,
-    GET_SELECTED_CHARACTERS,
+    // _SELECTED_CHARACTERS,
     GET_ALL_SELECTED,
     GET_CHARACTERS,
     GET_ALL_CHARACTERS,
 } from './queries';
 import { client } from './client';
-import { isArgumentPlaceholder } from '@babel/types';
 
 export const typeDefs = gql`
+    type Character {
+        name: String!
+        id: ID!
+        image: String!
+    }
+
     extend type Query {
         getOneSelected: String!
         isLoggedIn: Boolean!
@@ -55,12 +60,11 @@ export const resolvers = {
         },
     },
     Mutation: {
-        addSelected: (_root, { id, position }, { cache, getCacheKey }) => {
+        addSelected: (_root, { character, position }, { cache, getCacheKey }) => {
             const query = client.readQuery({ query: GET_ALL_SELECTED });
-
             client.writeQuery({
                 query: GET_ALL_SELECTED,
-                data: { selected: { ...query.selected, [position]: id } },
+                data: { selected: { ...query.selected, [position]: character } },
             });
             return null;
         },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICharacter } from '../models';
+import { ICharacter, ISelectedCharacter } from '../models';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_DELETED, ADD_SELECTED } from 'Apollo/mutations';
@@ -35,7 +35,7 @@ const CloseCross = styled.div`
     border-radius: 50%;
 `;
 
-export const CharacterItem: React.FC<ICharacter> = character => {
+export const CharacterItem: React.FC<ICharacter | ISelectedCharacter> = character => {
     const { id, name, image } = character;
 
     const [deleteCharacter, { data }] = useMutation(ADD_DELETED);
@@ -50,8 +50,9 @@ export const CharacterItem: React.FC<ICharacter> = character => {
         const slotPosition = getSlotPosition(name);
         if (!slotPosition) return null;
 
-        selectCharacter({ variables: { id, position: slotPosition } });
+        selectCharacter({ variables: { character, position: slotPosition } });
     };
+    
 
     return (
         <div key={id}>

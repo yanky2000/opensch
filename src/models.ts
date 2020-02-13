@@ -6,6 +6,10 @@ export interface ICharacter {
     image: string;
 }
 
+export interface ISelectedCharacter extends ICharacter {
+    position: string
+}
+
 export interface ICharacterData {
     characters: {
         results: ICharacter[];

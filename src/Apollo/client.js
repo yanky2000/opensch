@@ -12,35 +12,35 @@ export const client = new ApolloClient({
 });
 cache.writeData({
     data: {
-        getTest: 'store is working',
-        isLoggedIn: !!localStorage.getItem('token'),
-        cartItems: [],
+        // getTest: 'store is working',
+        // isLoggedIn: !!localStorage.getItem('token'),
+        // cartItems: [],
         deletedCharacterIds: [],
-        sel: {
-            left: 'left',
-            right: 'right',
-            __typename: 'Position',
-        },
-        selectedHeroes: [
-            {
-                position: '',
-                id: '',
-                name: 'right pos',
-                image: '',
-                __typename: 'Hero',
-            },
-            {
-                position: '',
-                id: '',
-                name: 'left pos',
-                image: '',
-                __typename: 'Hero',
-            },
-        ],
+        // sel: {
+        //     left: 'left',
+        //     right: 'right',
+        //     __typename: 'Position',
+        // },
+        // selectedHeroes: [
+        //     {
+        //         position: '',
+        //         id: '',
+        //         name: 'right pos',
+        //         image: '',
+        //         __typename: 'Hero',
+        //     },
+        //     {
+        //         position: '',
+        //         id: '',
+        //         name: 'left pos',
+        //         image: '',
+        //         __typename: 'Hero',
+        //     },
+        // ],
     },
 });
 
 client.writeQuery({
     query: GET_ALL_SELECTED,
-    data: { selected: { left: 'will', right: 'will r' } },
+    data: { selected: { left: { id: 'someId1' }, right: { id: 'someId2' } } },
 });
