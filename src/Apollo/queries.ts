@@ -12,24 +12,34 @@ export const GET_CHARACTERS = gql`
                 image
             }
         }
-        character(id: 1) {
-            id
+    }
+`;
+
+export const GET_ALL_CHARACTERS = gql`
+    query GetAllCharacters {
+        characters {
+            results {
+                name
+                id
+                image
+            }
         }
     }
 `;
+
 export const GET_DELETED_CHARACTERS = gql`
     {
         deletedCharacterIds
     }
 `;
 export const GET_ALL_SELECTED = gql`
-    {
+    query GetAllSelected {
         selected @client
     }
 `;
 export const GET_ONE_SELECTED = gql`
-    query GetOneSelected($characterId: String!){
-        selected(id:$characterId) @client
+    query GetOneSelected($characterId: String!) {
+        selected(id: $characterId) @client
     }
 `;
 export const GET_SELECTED_CHARACTERS = gql`

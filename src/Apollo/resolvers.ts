@@ -3,8 +3,15 @@ import { ApolloCache } from 'apollo-cache';
 // import * as GetCartItemTypes from './pages/__generated_/GetCartItems';
 // import * as LaunchTileTypes from './pages/__generated__/LaunchTile';
 import { Resolvers } from 'apollo-client';
-import { GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_ALL_SELECTED } from './queries';
+import {
+    GET_DELETED_CHARACTERS,
+    GET_SELECTED_CHARACTERS,
+    GET_ALL_SELECTED,
+    GET_CHARACTERS,
+    GET_ALL_CHARACTERS,
+} from './queries';
 import { client } from './client';
+import { isArgumentPlaceholder } from '@babel/types';
 
 export const typeDefs = gql`
     extend type Query {
@@ -18,6 +25,7 @@ export const typeDefs = gql`
     }
 
     extend type Mutation {
+        addDeleted(id: ID!): null
         addOrRemoveFromCart(id: ID!): [ID!]!
     }
 `;
@@ -36,17 +44,13 @@ interface AppResolvers extends Resolvers {
 export const resolvers = {
     Query: {
         getOneSelected: (_root, { id }, { cache, getCacheKey }) => {
-
-            const queryResult = cache.readQuery<GetCartItemTypes.GetCartItems>({
-
-            const queryResult = cache.readQuery({
-                query: GET_CART_ITEMS,
-            });
-            if (queryResult) {
-                // return true;
-                return queryResult.cartItems.includes(launch.id);
-            }
- 
+            // const queryResult = cache.readQuery<GetCartItemTypes.GetCartItems>({ // const queryResult = cache.readQuery({
+            //     query: GET_CART_ITEMS,
+            // });
+            // if (queryResult) {
+            //     // return true;
+            //     return queryResult.cartItems.includes(launch.id);
+            // }
             // return null;
         },
     },
@@ -74,13 +78,32 @@ export const resolvers = {
             // `;
             // const todo = cache.readFragment({ fragment, id });
             // const data = { ...todo, completed: !todo.completed };
+            // const allHeroes = client.readQuery({ query: GET_ALL_CHARACTERS });
+            // allHeroes.map(hero => hero.id !== id);
+            // console.log(34, allHeroes);
+
+            // client.writeQuery({
+            //     query: GET_CHARACTERS,
+            //     data: {
+
+            //         characters: {
+            //             results: allHeroes
+            //         },
+            //         // ...allHeroes.
+
+            //     },
+            // });
 
             const data = client.readQuery({ query: GET_DELETED_CHARACTERS });
+
+            const deleted = new Set(data.deletedCharacterIds);
+            deleted.add(id);
 
             client.writeQuery({
                 query: GET_DELETED_CHARACTERS,
                 data: {
-                    deletedCharacterIds: [...data.deletedCharacterIds, id],
+                    deletedCharacterIds: Array.from(deleted),
+                    // deletedCharacterIds: [...data.deletedCharacterIds, id],
                 },
             });
             return null;

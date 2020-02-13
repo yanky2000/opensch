@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { ICharacterVars, ICharacterData } from 'models';
+import { ICharacterVars, ICharacterData, ICharacter } from 'models';
 import { CharacterItem } from './CharacterItem';
 import { GET_CHARACTERS, GET_DELETED_CHARACTERS, GET_SELECTED_CHARACTERS, GET_ALL_SELECTED } from 'Apollo/queries';
 import { ADD_SELECTED } from 'Apollo/mutations';
@@ -10,14 +10,14 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
         variables: { name: searchString },
     });
 
-    const [selectCharacter, _] = useMutation(ADD_SELECTED);
+    const [selectCharacter] = useMutation(ADD_SELECTED);
+    const deleted = useQuery(GET_DELETED_CHARACTERS);
 
     if (loading) return <p>Loading...</p>;
     if (error || !data) return <p>Error :(</p>;
 
     function Test() {
-        const { data } = useQuery(GET_DELETED_CHARACTERS);
-        return <div>Deleted ids: {JSON.stringify(data.deletedCharacterIds)}</div>;
+        return <div>Deleted ids: {JSON.stringify(deleted.data.deletedCharacterIds)}</div>;
     }
     function Selected() {
         const { data } = useQuery(GET_SELECTED_CHARACTERS);
@@ -30,15 +30,23 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
     const handle = () => {
         selectCharacter({ variables: { position: 'right' } });
     };
+
+    let characters = data && data.characters && data.characters.results && data.characters.results;
+
+    function removeDeleted(arr: ICharacter[] = []): ICharacter[] | [] {
+        if (!arr) return [];
+        return arr.filter(({ id }) => !deleted.data.deletedCharacterIds.includes(id));
+    }
+
+    characters = characters ? removeDeleted(characters) : [];
+
     return (
         <ul>
             <Test />
             <Left />
-            {data &&
-                data.characters &&
-                data.characters.results &&
-                data.characters.results.map(character => <CharacterItem key={character.id} {...character} />)}
-                
+            {characters.map(character => (
+                <CharacterItem key={character.id} {...character} />
+            ))}
         </ul>
     );
 };

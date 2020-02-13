@@ -17,9 +17,9 @@ const CharacterCard = styled.div<IProps>`
     position: relative;
     width: 180px;
     height: 200px;
-    background: ${({ url }): string => `url("${url}")`};
     background-size: cover;
 `;
+    // background: ${({ url }): string => `url("${url}")`};
 
 //TODO: FIX
 const CloseCross = styled.div`
