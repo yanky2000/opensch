@@ -19,7 +19,7 @@ const CharacterCard = styled.div<IProps>`
     height: 200px;
     background-size: cover;
 `;
-    // background: ${({ url }): string => `url("${url}")`};
+// background: ${({ url }): string => `url("${url}")`};
 
 //TODO: FIX
 const CloseCross = styled.div`
@@ -38,8 +38,8 @@ const CloseCross = styled.div`
 export const CharacterItem: React.FC<ICharacter | ISelectedCharacter> = character => {
     const { id, name, image } = character;
 
-    const [deleteCharacter, { data }] = useMutation(ADD_DELETED);
-    const [selectCharacter, _] = useMutation(ADD_SELECTED);
+    const [deleteCharacter] = useMutation(ADD_DELETED);
+    const [selectCharacter] = useMutation(ADD_SELECTED);
 
     const deleteCard = e => {
         e.stopPropagation();
@@ -52,7 +52,6 @@ export const CharacterItem: React.FC<ICharacter | ISelectedCharacter> = characte
 
         selectCharacter({ variables: { character, position: slotPosition } });
     };
-    
 
     return (
         <div key={id}>
