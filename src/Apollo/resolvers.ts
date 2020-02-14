@@ -48,9 +48,11 @@ export const resolvers: IAppResolvers = {
         addDeleted: (_root, { id }): null => {
             const data = client.readQuery({ query: GET_ALL_DELETED_CHARACTERS });
 
-            const deleted = new Set(data.deletedCharacterIds);
+            const deleted = new Set(data.deleted);
+            // console.log(1, deleted);
             deleted.add(id);
 
+            // console.log(1, deleted);
             client.writeQuery({
                 query: GET_ALL_DELETED_CHARACTERS,
                 data: {
