@@ -7,3 +7,8 @@ export const getSlotPosition = (name: ICharacter['name']): IAllSlotPositions | n
 
     return null;
 };
+
+// export const removeDeleted = (arr: ICharacter[] = [], deleted = []): ICharacter[] | [] => {
+//     if (!arr) return [];
+//     return arr.filter(({ id }) => !deleted.data.deletedCharacterIds.includes(id));
+// };
