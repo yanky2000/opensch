@@ -1,3 +1,4 @@
+import { SearchForm } from './components/SearchForm';
 export const RICK = 'Rick';
 export const MORTY = 'Morty';
 
@@ -21,4 +22,6 @@ export const SLOT_POSITIONS = {
     [CHARACTERS.Morty]: POSITIONS.right,
 };
 
-console.log(Object.keys(POSITIONS));
+export const TEST_IDS = {
+    searchForm: 'searchForm',
+};

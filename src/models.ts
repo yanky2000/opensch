@@ -1,4 +1,4 @@
-import { POSITIONS } from "./constants";
+import { POSITIONS } from './constants';
 
 export interface ICharacter {
     id: string;
@@ -7,7 +7,7 @@ export interface ICharacter {
 }
 
 export interface ISelectedCharacter extends ICharacter {
-    position: string
+    position: string;
 }
 
 export interface ICharacterData {
@@ -21,4 +21,4 @@ export interface ICharacterVars {
     name: string;
 }
 
-export type IAllSlotPositions = keyof typeof POSITIONS
+export type IAllSlotPositions = keyof typeof POSITIONS;

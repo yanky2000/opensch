@@ -10,19 +10,19 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
         variables: { name: searchString },
     });
 
-    const [selectCharacter] = useMutation(ADD_SELECTED);
+    // const [selectCharacter] = useMutation(ADD_SELECTED);
     const deleted = useQuery(GET_DELETED_CHARACTERS);
 
     if (loading) return <p>Loading...</p>;
     if (error || !data) return <p>Error :(</p>;
 
-    function Test() {
-        return <div>Deleted ids: {JSON.stringify(deleted.data.deletedCharacterIds)}</div>;
-    }
-    function Left() {
-        const { data } = useQuery(GET_ALL_SELECTED);
-        return <div>Selected ids: {JSON.stringify(data.selected)}</div>;
-    }
+    // function Test() {
+    //     return <div>Deleted ids: {JSON.stringify(deleted.data.deletedCharacterIds)}</div>;
+    // }
+    // function Left() {
+    //     const { data } = useQuery(GET_ALL_SELECTED);
+    //     return <div>Selected ids: {JSON.stringify(data.selected)}</div>;
+    // }
 
     let characters = data && data.characters && data.characters.results && data.characters.results;
 
@@ -32,11 +32,10 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
     }
 
     characters = characters ? removeDeleted(characters) : [];
+    if (!characters.length) return <h1>No characters found!</h1>;
 
     return (
         <ul>
-            <Test />
-            <Left />
             {characters.map(character => (
                 <CharacterItem key={character.id} {...character} />
             ))}

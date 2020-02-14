@@ -8,18 +8,20 @@ import { getSlotPosition } from 'utils';
 interface IProps {
     url: string;
 }
-interface ICharacterCardProps extends ICharacter {
-    cb?: any;
-}
+
+// interface ICharacterCardProps extends ICharacter {
+//     cb?: any;
+// }
+
 // export const CharacterItem: React.FC<ICharacter & {cb: () => {}}> = ({ name, id, image, cb }) => {
 const CharacterCard = styled.div<IProps>`
     /* display: flex; */
     position: relative;
     width: 180px;
     height: 200px;
+    background: ${({ url }): string => `url("${url}")`};
     background-size: cover;
 `;
-// background: ${({ url }): string => `url("${url}")`};
 
 //TODO: FIX
 const CloseCross = styled.div`
@@ -41,14 +43,14 @@ export const CharacterItem: React.FC<ICharacter | ISelectedCharacter> = characte
     const [deleteCharacter] = useMutation(ADD_DELETED);
     const [selectCharacter] = useMutation(ADD_SELECTED);
 
-    const deleteCard = e => {
+    const deleteCard = (e: React.MouseEvent): void => {
         e.stopPropagation();
         deleteCharacter({ variables: { id } });
     };
 
-    const selectCard = e => {
+    const selectCard = (): void => {
         const slotPosition = getSlotPosition(name);
-        if (!slotPosition) return null;
+        if (!slotPosition) return;
 
         selectCharacter({ variables: { character, position: slotPosition } });
     };
