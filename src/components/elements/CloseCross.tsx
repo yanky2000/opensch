@@ -12,6 +12,7 @@ const CloseCrossComponent = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    opacity: 0.9;
 `;
 
 export const CloseCross: React.FC<{ cb: (e: React.MouseEvent) => void }> = ({ cb }) => {

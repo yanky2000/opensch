@@ -7,7 +7,10 @@ import { GET_CHARACTERS, GET_ALL_DELETED_CHARACTERS } from 'Apollo/queries';
 import { removeDeleted } from 'utils';
 
 const CharacterListUl = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
     list-style: none;
+    justify-content: center;
 `;
 
 export const CharactersList: React.FC<{ searchString: string }> = ({ searchString }) => {
