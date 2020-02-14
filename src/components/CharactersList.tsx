@@ -1,10 +1,10 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { ICharacterVars, ICharacterData, ICharacter } from 'models';
-import { CharacterCard } from './CharacterCard';
-import { GET_CHARACTERS, GET_ALL_SELECTED, GET_DELETED_CHARACTERS } from 'Apollo/queries';
-import { ADD_SELECTED } from 'Apollo/mutations';
+import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
+import { CharacterCard } from './CharacterCard';
+import { ICharacterVars, ICharacterData, IDeletedCharacterData } from 'models';
+import { GET_CHARACTERS, GET_ALL_DELETED_CHARACTERS } from 'Apollo/queries';
+import { removeDeleted } from 'utils';
 
 const CharacterListUl = styled.ul`
     list-style: none;
@@ -15,23 +15,20 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
         variables: { name: searchString },
     });
 
-    const deleted = useQuery(GET_DELETED_CHARACTERS);
+    const deletedIds = useQuery<IDeletedCharacterData>(GET_ALL_DELETED_CHARACTERS);
 
     if (loading) return <p>Loading...</p>;
     if (error || !data) return <p>Error :(</p>;
 
-    function removeDeleted(arr: ICharacter[] = []): ICharacter[] | [] {
-        if (!arr) return [];
-        return arr.filter(({ id }) => !deleted.data.deletedCharacterIds.includes(id));
-    }
-
     let characters = data && data.characters && data.characters.results && data.characters.results;
 
-    characters = removeDeleted(characters);
+    if (deletedIds.data) {
+        characters = removeDeleted(characters, deletedIds.data.deleted);
+    }
 
     return (
         <>
-            {characters.length ? (
+            {!!characters.length ? (
                 <CharacterListUl>
                     {characters.map(character => (
                         <li key={character.id}>

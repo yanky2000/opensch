@@ -4,7 +4,6 @@ import throttle from 'lodash/throttle';
 import { QUERY_MIN_CHAR_LENGTH, THROTTLE_DELAY_MS, TEST_IDS } from '../constants';
 
 interface ISearchFormProps {
-    // FIXME: change type
     cb: any;
 }
 export const SearchForm: React.FC<ISearchFormProps> = ({ cb }) => {

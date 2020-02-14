@@ -1,5 +1,5 @@
 import { RICK, SLOT_POSITIONS, MORTY } from './constants';
-import { ICharacter, IAllSlotPositions } from './models';
+import { ICharacter, IAllSlotPositions, IId } from './models';
 
 export const getSlotPosition = (name: ICharacter['name']): IAllSlotPositions | null => {
     if (name.includes(RICK)) return SLOT_POSITIONS[RICK];
@@ -8,7 +8,7 @@ export const getSlotPosition = (name: ICharacter['name']): IAllSlotPositions | n
     return null;
 };
 
-// export const removeDeleted = (arr: ICharacter[] = [], deleted = []): ICharacter[] | [] => {
-//     if (!arr) return [];
-//     return arr.filter(({ id }) => !deleted.data.deletedCharacterIds.includes(id));
-// };
+export const removeDeleted = (arr: ICharacter[] = [], deleted: IId[] = []): ICharacter[] | [] => {
+    if (!arr) return [];
+    return arr.filter(({ id }) => !deleted.includes(id));
+};

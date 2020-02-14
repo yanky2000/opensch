@@ -1,4 +1,3 @@
-import { SearchForm } from './components/SearchForm';
 export const RICK = 'Rick';
 export const MORTY = 'Morty';
 

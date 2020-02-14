@@ -1,7 +1,8 @@
 import { POSITIONS } from './constants';
 
+export type IId = string;
 export interface ICharacter {
-    id: string;
+    id: IId;
     name: string;
     image: string;
 }
@@ -17,7 +18,6 @@ export interface ICharacterData {
 }
 
 export interface ICharacterVars {
-    // id: string;
     name: string;
 }
 export interface ISelectedCharacterData {
@@ -25,7 +25,7 @@ export interface ISelectedCharacterData {
 }
 
 export interface IDeletedCharacterData {
-    selected: ISelectedCharacter[];
+    deleted: IId[];
 }
 
 export type IAllSlotPositions = keyof typeof POSITIONS;
