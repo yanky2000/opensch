@@ -34,6 +34,7 @@ const mocks = [
 //         </MockedProvider>,
 //     );
 // });
+
 it('should render dog', async () => {
     const charactersMock = {
         request: {
