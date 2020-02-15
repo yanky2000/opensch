@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import throttle from 'lodash/throttle';
-import { QUERY_MIN_CHAR_LENGTH, THROTTLE_DELAY_MS, TEST_IDS } from '../constants';
+import { QUERY_MIN_CHAR_LENGTH, THROTTLE_DELAY_MS } from '../constants';
 
 interface ISearchFormProps {
     cb: any;
@@ -21,15 +21,5 @@ export const SearchForm: React.FC<ISearchFormProps> = ({ cb }) => {
         }
     }
 
-    return (
-        <TextField
-            data-testid={TEST_IDS.searchForm}
-            name="searchTerm"
-            label="name"
-            id="name"
-            onChange={changeHandler}
-            variant="outlined"
-            required
-        />
-    );
+    return <TextField name="searchTerm" label="name" id="name" onChange={changeHandler} variant="outlined" required />;
 };

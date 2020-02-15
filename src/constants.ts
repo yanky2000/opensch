@@ -1,6 +1,3 @@
-export const RICK = 'Rick';
-export const MORTY = 'Morty';
-
 export const THROTTLE_DELAY_MS = 300;
 export const QUERY_MIN_CHAR_LENGTH = 2;
 
@@ -13,14 +10,7 @@ export enum POSITIONS {
     right = 'right',
 }
 
-export const LEFT = 'left';
-export const RIGHT = 'right';
-
 export const SLOT_POSITIONS = {
     [CHARACTERS.Rick]: POSITIONS.left,
     [CHARACTERS.Morty]: POSITIONS.right,
-};
-
-export const TEST_IDS = {
-    searchForm: 'searchForm',
 };
