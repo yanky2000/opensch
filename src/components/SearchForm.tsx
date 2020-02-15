@@ -23,28 +23,11 @@ export const SearchForm: React.FC<ISearchFormProps> = ({ cb }) => {
 
     return (
         <TextField
-            // SelectProps={{
-            //     SelectDisplayProps: {
-            //         // 'data-testid': 'helo',
-            //     },
-            //     // data-testid={TEST_IDS.searchForm}
-            // }}
-            // InputProps={
-            //     {
-            //     }
-            // }
-            // InputProps={{
-
             data-testid={TEST_IDS.searchForm}
-            // }
-            // }
             name="searchTerm"
             label="name"
             id="name"
-            // defaultValue={values.title}
             onChange={changeHandler}
-            // className={classes.textField}
-            // helperText="Some important text"
             variant="outlined"
             required
         />

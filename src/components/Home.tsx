@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { SearchForm } from './SearchForm';
-import { CharactersList } from './CharactersList';
-import { PartySlots } from './PairSlots';
+import { SearchForm, CharactersList, PartySlots } from './';
 import styled from 'styled-components';
 
 const HomeContainer = styled.div`

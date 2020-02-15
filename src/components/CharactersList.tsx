@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
-import { CharacterCard } from './CharacterCard';
+import { CharacterCard } from './';
 import { ICharacterVars, ICharacterData, IDeletedCharacterData } from 'models';
 import { GET_CHARACTERS, GET_ALL_DELETED_CHARACTERS } from 'Apollo/queries';
 import { removeDeleted } from 'utils';

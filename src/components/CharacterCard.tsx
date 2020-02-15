@@ -3,8 +3,7 @@ import { ICharacter, ISelectedCharacter } from '../models';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_DELETED, ADD_SELECTED } from 'Apollo/mutations';
 import { getSlotPosition } from 'utils';
-import { CloseCross } from './elements/CloseCross';
-import { CharacterItem } from './elements/CharacterItem';
+import { CloseCross, CharacterItem } from './elements/';
 
 export const CharacterCard: React.FC<ICharacter | ISelectedCharacter> = character => {
     const { id, name } = character;

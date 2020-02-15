@@ -13,7 +13,6 @@ const CharacterCardDiv = styled.div<{ url: string }>`
     position: relative;
     width: 180px;
     height: 200px;
-    /* margin-right: 30px; */
     margin: 30px;
     background: ${({ url }): string => `url("${url}")`};
     background-color: lightgray;
