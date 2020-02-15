@@ -17,16 +17,15 @@ export const CharactersList: React.FC<{ searchString: string }> = ({ searchStrin
     const { loading, error, data } = useQuery<ICharacterData, ICharacterVars>(GET_CHARACTERS, {
         variables: { name: searchString },
     });
-
-    const deletedIds = useQuery<IDeletedCharacterData>(GET_ALL_DELETED_CHARACTERS);
+    const { data: deletedIds2 } = useQuery<IDeletedCharacterData>(GET_ALL_DELETED_CHARACTERS);
 
     if (loading) return <p>Loading...</p>;
     if (error || !data) return <p>Error :(</p>;
 
     let characters = data && data.characters && data.characters.results && data.characters.results;
 
-    if (deletedIds.data) {
-        characters = removeDeleted(characters, deletedIds.data.deleted);
+    if (deletedIds2) {
+        characters = removeDeleted(characters, deletedIds2.deleted);
     }
 
     return (
