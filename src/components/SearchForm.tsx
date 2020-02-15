@@ -4,7 +4,7 @@ import throttle from 'lodash/throttle';
 import { QUERY_MIN_CHAR_LENGTH, THROTTLE_DELAY_MS } from '../constants';
 
 interface ISearchFormProps {
-    cb: any;
+    cb: (val: string) => void;
 }
 export const SearchForm: React.FC<ISearchFormProps> = ({ cb }) => {
     const throttledFetch = useCallback(
