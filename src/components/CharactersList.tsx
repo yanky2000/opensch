@@ -10,7 +10,8 @@ const CharacterListUl = styled.ul`
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0;
 `;
 
 export const CharactersList: React.FC<{ searchString: string }> = ({ searchString }) => {

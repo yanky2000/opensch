@@ -6,16 +6,23 @@ import { CharacterItem } from './elements/';
 import styled from 'styled-components';
 
 const PartySlotsContainer = styled.div`
+    align-self: center;
+    margin-top: 48px;
     h1 {
         font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
         text-align: center;
     }
     ul {
+        width: 390px;
         display: flex;
         padding: 0;
         margin: 0;
-        justify-content: center;
+        justify-content: space-between;
     }
+`;
+
+const PartyCharacterItem = styled(CharacterItem)`
+    margin: 0;
 `;
 
 export const PartySlots: React.FC = () => {
@@ -29,7 +36,8 @@ export const PartySlots: React.FC = () => {
             <h1>PARTY</h1>
             <ul>
                 {Object.values(data.selected).map(character => (
-                    <CharacterItem key={character.id} {...character} />
+                    // <CharacterItem key={character.id} {...character} />
+                    <PartyCharacterItem key={character.id} {...character} />
                 ))}
             </ul>
         </PartySlotsContainer>

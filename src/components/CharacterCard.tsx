@@ -24,10 +24,8 @@ export const CharacterCard: React.FC<ICharacter | ISelectedCharacter> = characte
     };
 
     return (
-        <div>
-            <CharacterItem {...character} cb={selectCard}>
-                <CloseCross cb={deleteCard} />
-            </CharacterItem>
-        </div>
+        <CharacterItem {...character} cb={selectCard}>
+            <CloseCross cb={deleteCard} />
+        </CharacterItem>
     );
 };

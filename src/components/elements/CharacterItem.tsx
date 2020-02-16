@@ -4,6 +4,7 @@ import { ICharacter, ISelectedCharacter } from '../../models';
 
 interface IProps {
     title?: string;
+    className?: string;
     cb?: (e: React.MouseEvent) => void;
 }
 
@@ -13,7 +14,7 @@ const CharacterCardDiv = styled.div<{ url: string }>`
     position: relative;
     width: 180px;
     height: 200px;
-    margin: 30px;
+    margin: 15px auto;
     background: ${({ url }): string => `url("${url}")`};
     background-color: lightgray;
     background-size: cover;
@@ -26,9 +27,15 @@ const CharacterCardDiv = styled.div<{ url: string }>`
     }
 `;
 
-export const CharacterItem: React.FC<(ICharacter | ISelectedCharacter) & IProps> = ({ image, title, cb, children }) => {
+export const CharacterItem: React.FC<(ICharacter | ISelectedCharacter) & IProps> = ({
+    image,
+    title,
+    cb,
+    children,
+    className,
+}) => {
     return (
-        <CharacterCardDiv url={image} onClick={cb}>
+        <CharacterCardDiv className={className} url={image} onClick={cb}>
             <span>{title && title.toUpperCase()}</span>
             {children}
         </CharacterCardDiv>
