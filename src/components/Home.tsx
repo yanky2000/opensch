@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const HomeContainer = styled.div`
     display: flex;
+    width: 810px;
     flex-direction: column;
 `;
 
