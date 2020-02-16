@@ -1,7 +1,5 @@
 import gql from 'graphql-tag';
 import { ApolloCache } from 'apollo-cache';
-// import * as GetCartItemTypes from './pages/__generated_/GetCartItems';
-// import * as LaunchTileTypes from './pages/__generated__/LaunchTile';
 import { Resolvers } from 'apollo-client';
 import { GET_ALL_DELETED_CHARACTERS, GET_ALL_SELECTED } from './queries';
 import { client } from './client';
@@ -20,7 +18,6 @@ export const typeDefs = gql`
     extend type Mutation {
         addDeleted(id: ID!): null
         addSelected(character: Character!, position: String!): null
-        # addOrRemoveFromCart(id: ID!): [ID!]!
     }
 `;
 
@@ -49,10 +46,8 @@ export const resolvers: IAppResolvers = {
             const data = client.readQuery({ query: GET_ALL_DELETED_CHARACTERS });
 
             const deleted = new Set(data.deleted);
-            // console.log(1, deleted);
             deleted.add(id);
 
-            // console.log(1, deleted);
             client.writeQuery({
                 query: GET_ALL_DELETED_CHARACTERS,
                 data: {
